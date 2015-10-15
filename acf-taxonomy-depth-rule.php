@@ -52,7 +52,7 @@ function acf_location_rules_match_taxonomy_depth( $match, $rule, $options )
     }
     elseif($rule['operator'] == "!=")
     {
-        $match = ($depth == $term_depth);
+        $match = ($depth != $term_depth);
     }
     elseif($rule['operator'] == "<")
     {
