@@ -48,11 +48,11 @@ function acf_location_rules_match_taxonomy_depth( $match, $rule, $options )
 
     if($rule['operator'] == "==")
     {
-        $match = ($depth == $term_depth);
+        $match = ($term_depth == $depth);
     }
     elseif($rule['operator'] == "!=")
     {
-        $match = ($depth != $term_depth);
+        $match = ($term_depth != $depth);
     }
     elseif($rule['operator'] == "<")
     {
