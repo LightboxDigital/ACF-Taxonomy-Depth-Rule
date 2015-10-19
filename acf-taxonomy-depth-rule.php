@@ -11,10 +11,10 @@ function acf_location_rules_types( $choices )
 add_filter('acf/location/rule_operators', 'acf_location_rules_operators');
 function acf_location_rules_operators( $choices )
 {
-	//BY DEFAULT WE HAVE == AND !=
+    //BY DEFAULT WE HAVE == AND !=
     $choices['<'] = 'is less than';
     $choices['>'] = 'is greater than';
- 
+
     return $choices;
 }
 
@@ -23,11 +23,11 @@ add_filter('acf/location/rule_values/taxonomy_depth', 'acf_location_rules_values
 function acf_location_rules_values_taxonomy_depth( $choices )
 {
 
-	for ($i=0; $i < 6; $i++)
-	{ 
-		$choices[$i] = $i;
-	}
- 
+    for ($i=0; $i < 6; $i++)
+    {
+        $choices[$i] = $i;
+    }
+
     return $choices;
 }
 
@@ -37,7 +37,7 @@ function acf_location_rules_match_taxonomy_depth( $match, $rule, $options )
 {
     $depth = (int) $rule['value'];
 
-	if(isset($_GET['page']) && $_GET['page'] == "shopp-categories" && isset($_GET['id']))
+    if(isset($_GET['page']) && $_GET['page'] == "shopp-categories" && isset($_GET['id']))
     {
         $term_depth = (int) count(get_ancestors($_GET['id'], 'shopp_category'));
     }
@@ -45,14 +45,14 @@ function acf_location_rules_match_taxonomy_depth( $match, $rule, $options )
     {
         $term_depth = (int) count(get_ancestors($_GET['tag_ID'], $_GET['taxonomy']));
     }
- 
+
     if($rule['operator'] == "==")
     {
-    	$match = ($depth == $term_depth);
+        $match = ($term_depth == $depth);
     }
     elseif($rule['operator'] == "!=")
     {
-        $match = ($depth == $term_depth);
+        $match = ($term_depth != $depth);
     }
     elseif($rule['operator'] == "<")
     {
@@ -62,6 +62,6 @@ function acf_location_rules_match_taxonomy_depth( $match, $rule, $options )
     {
         $match = ($term_depth > $depth);
     }
- 
+
     return $match;
 }
